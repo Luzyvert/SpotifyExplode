@@ -6,5 +6,5 @@ public class PlaylistSearchResult : Playlist, ISearchResult
 {
     public string? Url => Id;
 
-    public string? Title => Name;
+    public string? Title => base.Title;
 }

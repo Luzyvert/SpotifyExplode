@@ -12,17 +12,69 @@ public static class Program
     {
         Console.Title = "SpotifyExplode Demo";
 
+        await SpotifyTrack();
+        await SpotifyPlaylist();
+        await SpotifyAlbum();
+        await SpotifyUser();
+    }
+
+    public static async Task SpotifyTrack()
+    {
         var spotify = new SpotifyClient();
 
         // Get the track ID
         Console.Write("Enter Spotify track ID or URL: ");
-        var trackId = TrackId.Parse(Console.ReadLine() ?? "");
+        try
+        {
+            var trackId = TrackId.Parse(Console.ReadLine() ?? "");
+            var track = await spotify.Tracks.GetAsync(trackId);
 
-        var track = await spotify.Tracks.GetAsync(trackId);
+            Console.WriteLine($"Title: {track.Title}");
+            Console.WriteLine($"Duration (milliseconds): {track.DurationMs}");
+            Console.WriteLine($"{track.Album}");
+        }
+        catch { return; }
+    }
 
-        Console.WriteLine($"Title: {track.Title}");
-        Console.WriteLine($"Duration (milliseconds): {track.DurationMs}");
-        Console.WriteLine($"{track.Album}");
+    public static async Task SpotifyPlaylist()
+    {
+        var spotify = new SpotifyClient();
+
+        Console.Write("Enter Spotify Playlist URL: ");
+        var url = Console.ReadLine() ?? "";
+
+        var playlist = await spotify.Playlists.GetAsync(url);
+
+        Console.WriteLine($"Title: {playlist.Title}");
+        Console.WriteLine($"Images: {playlist.Images}");
+        Console.ReadLine();
+    }
+
+    public static async Task SpotifyAlbum()
+    {
+        var spotify = new SpotifyClient();
+
+        Console.Write("Enter Spotify Album URL: ");
+        var url = Console.ReadLine() ?? "";
+
+        var album = await spotify.Albums.GetAsync(url);
+
+        Console.WriteLine($"Title: {album.Title}");
+        Console.WriteLine($"Images: {album.Images}");
+        Console.ReadLine();
+    }
+
+    public static async Task SpotifyUser()
+    {
+        var spotify = new SpotifyClient();
+
+        Console.Write("Enter Spotify User URL: ");
+        var url = Console.ReadLine() ?? "";
+
+        var user = await spotify.Users.GetAsync(url);
+
+        Console.WriteLine($"Title: {user.DisplayName}");
+        Console.WriteLine($"Images: {user.Images}");
         Console.ReadLine();
     }
 }

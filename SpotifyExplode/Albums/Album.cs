@@ -19,7 +19,7 @@ public class Album
     public string Label { get; set; } = default!;
 
     [JsonPropertyName("name")]
-    public string Name { get; set; } = default!;
+    public string Title { get; set; } = default!;
 
     [JsonPropertyName("album_type")]
     public AlbumType AlbumType { get; set; }
@@ -52,5 +52,5 @@ public class Album
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    public override string ToString() => $"Album ({Name})";
+    public override string ToString() => $"Album ({Title})";
 }

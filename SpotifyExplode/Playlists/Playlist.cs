@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using SpotifyExplode.Common;
 using SpotifyExplode.Tracks;
 using SpotifyExplode.Users;
 
@@ -11,10 +12,13 @@ public class Playlist
     public PlaylistId Id { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; } = default!;
+    public string Title { get; set; } = default!;
 
     [JsonPropertyName("description")]
     public string Description { get; set; } = default!;
+
+    [JsonPropertyName("images")]
+    public List<Image> Images { get; set; } = default!;
 
     [JsonPropertyName("followers")]
     public Follower Followers { get; set; } = default!;
